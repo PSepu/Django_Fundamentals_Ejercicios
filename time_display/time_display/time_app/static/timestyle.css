@@ -1,0 +1,29 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.head{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(189, 188, 188) ;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    width: 800px;
+}
+
+.watch{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 70px;
+    height: 300px;
+    width: 800px;
+    background-color: rgb(101, 101, 248, .5);
+    color: white;
+    margin-top: 5px;
+} 
