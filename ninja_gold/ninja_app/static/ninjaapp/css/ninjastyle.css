@@ -1,0 +1,68 @@
+.header{
+    background-color:grey;
+    color: white;
+    padding-left: 15px;
+}
+.gamecontainer{
+    display:flex;
+    flex-direction: row;
+}
+
+.farm{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color:rgb(78, 177, 78);
+    outline: rgb(3, 146, 50) 3px solid;
+    color: white;
+    margin: 10px;
+    width: 220px;
+    height: 150px;
+}
+
+.cave{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color:rgb(180, 147, 36);
+    outline: rgb(102, 94, 24) 3px solid;
+    color: white;
+    margin: 10px;
+    width: 220px;
+    height: 150px;
+}
+
+.house{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color:rgb(180, 77, 36);
+    outline: rgb(102, 46, 24) 3px solid;
+    color: white;
+    margin: 10px;
+    width: 220px;
+    height: 150px;
+}
+
+.casino{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color:rgb(50, 36, 180);
+    outline: rgb(29, 24, 102) 3px solid;
+    color: white;
+    margin: 10px;
+    width: 220px;
+    height: 150px;
+}
+.log{
+    background-color:grey;
+    color: white;
+}
+.log{
+    padding: 15px;
+}
+.buttonR{
+    margin-left:15px;
+    margin-top:10px;
+}
