@@ -1,0 +1,96 @@
+Crear 5 Libros 
+Book.objects.create(title="C Sharp", desc="Libro sobre C Sharp")
+Book.objects.create(title="Java", desc="Libro sobre Java")
+Book.objects.create(title="Python", desc="Libro sobre Python")
+Book.objects.create(title="PHP", desc="Libro sobrE PHP")
+Book.objects.create(title="Ruby", desc="Libro sobre Ruby")
+
+Author.objects.create(first_name="Jane", last_name="Austen")
+Author.objects.create(first_name="Emily", last_name="Dickinson")
+Author.objects.create(first_name="Fyodor", last_name="Dostoevksy")
+Author.objects.create(first_name="William", last_name="Shakespeare")
+Author.objects.create(first_name="Lau", last_name="Tzu")
+
+Cambiar nombre de C Sharp
+c=Book.objects.get(id=1)
+c.title="C #"
+c.save()
+
+Cambiar nombre del cuarto autor a Bill
+c=Author.objects.get(id=4)
+c.first_name="Bill"
+c.save()
+
+Asignar los dos primeros libros a el primer autor
+>>> this_book = Book.objects.get(id=1)
+>>> this_bookTwo = Book.objects.get(id=2)
+>>> this_author = Author.objects.get(id=1)
+
+>>> this_author.books.add(this_book)
+>>> this_author.books.add(this_bookTwo)
+
+>>> this_author.books.all()
+<QuerySet [<Book: <Book: C #>>, <Book: <Book: Java>>]>
+
+Asignar los primeros 3 libros al segundo autor 
+this_author.books.remove(this_book)
+this_author.books.remove(this_bookTwo)
+
+this_authorTwo = Author.objects.get(id=2)
+this_authorTwo.books.add(this_book)
+this_authorTwo.books.add(this_bookTwo)
+this_authorTwo.books.add(this_bookThree)
+
+>>> this_authorTwo.books.all()
+<QuerySet [<Book: <Book: C #>>, <Book: <Book: Java>>, <Book: <Book: Python>>]
+
+this_authorTwo.books.remove(this_book)
+this_authorTwo.books.remove(this_bookTwo)
+this_authorTwo.books.remove(this_bookThree)
+
+>>> this_authorTwo.books.all()
+<QuerySet []>
+
+Asignar al tercer autor los 4 primeros libros 
+this_authorThree = Author.objects.get(id=3)
+this_bookFour = Book.objects.get(id=4)
+
+this_authorThree.books.add(this_book)
+this_authorThree.books.add(this_bookTwo)
+this_authorThree.books.add(this_bookThree)
+this_authorThree.books.add(this_bookFour)
+
+>>> this_authorThree.books.all()
+<QuerySet [<Book: <Book: C #>>, <Book: <Book: Java>>, <Book: <Book: Python>>, <Book: <Book: PHP>>]>
+
+Asignar al cuarto autor los 5 primeros libros 
+this_authorFour = Author.objects.get(id=4)
+this_bookFive = Book.objects.get(id=5)
+
+this_authorFour.books.add(this_book)
+this_authorFour.books.add(this_bookTwo)
+this_authorFour.books.add(this_bookThree)
+this_authorFour.books.add(this_bookFour)
+this_authorFour.books.add(this_bookFive)
+
+this_bookThree.author.all()
+<QuerySet [<Author: <Author: Fyodor Dostoevksy>>, <Author: <Author: Emily Dickinson>>, <Author: <Author: Bill Shakespeare>>, <Author: <Author: Jane 
+this_bookThree.author.remove(this_author)
+this_bookThree.author.all()
+<QuerySet [<Author: <Author: Fyodor Dostoevksy>>, <Author: <Author: Emily Dickinson>>, <Author: <Author: Bill Shakespeare>>]>
+
+Agregar el 5to autot
+this_authorFive = Author.objects.get(id=5)
+this_authorFive.books.add(this_bookTwo)
+
+Todos los libros del autor 3
+this_authorThree.books.all()
+<QuerySet [<Book: <Book: C #>>, <Book: <Book: Java>>, <Book: <Book: Python>>, <Book: <Book: PHP>>]>
+
+Todos los autores del libro 5
+this_bookFive.author.all()
+<QuerySet [<Author: <Author: Bill Shakespeare>>]>
+
+
+
+
