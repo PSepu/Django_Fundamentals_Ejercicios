@@ -1,0 +1,40 @@
+
+python manage.py shell
+from dojo_ninjas_app import*
+Dojo.objects.create(name="Naruto", city="Santiago", state="Metro")
+Dojo.objects.create(name="Goku", city="Temuco", state="Sur")
+Dojo.objects.create(name="Eren", city="Arica", state="Norte")
+
+c = Dojo.objects.get(id=1)
+c.delete()
+(1, {'dojo_ninja_app.Dojo': 1})
+c = Dojo.objects.get(id=2)
+c.delete()
+(1, {'dojo_ninja_app.Dojo': 1})
+c = Dojo.objects.get(id=3)
+c.delete()
+(1, {'dojo_ninja_app.Dojo': 1})
+
+Dojo.objects.create(name="Naruto", city="Santiago", state="Metro")
+Dojo.objects.create(name="Goku", city="Temuco", state="Sur")
+Dojo.objects.create(name="Eren", city="Arica", state="Norte")
+
+sede = Dojo.objects.get(id=4)
+
+alumnoUno = Ninja.objects.create(first_name="Pablo", last_name="Sepulveda", sede = Dojo.objects.get(id=4))
+alumnoDos = Ninja.objects.create(first_name="Andres", last_name="Morande", sede = Dojo.objects.get(id=4))
+alumnoTres = Ninja.objects.create(first_name="Juan", last_name="Vidal", sede = Dojo.objects.get(id=4))
+
+alumnoUno = Ninja.objects.create(first_name="Pedro", last_name="Caamaño", sede = Dojo.objects.get(id=5))
+alumnoDos = Ninja.objects.create(first_name="Felipe", last_name="Vergara", sede = Dojo.objects.get(id=5))
+alumnoTres = Ninja.objects.create(first_name="Vicente", last_name="Burgos", sede = Dojo.objects.get(id=5))
+
+alumnoUno = Ninja.objects.create(first_name="Diego", last_name="Galvan", sede = Dojo.objects.get(id=6))
+alumnoDos = Ninja.objects.create(first_name="Sebastian", last_name="Jordana", sede = Dojo.objects.get(id=6))
+alumnoTres = Ninja.objects.create(first_name="Fernando", last_name="Jimenez", sede = Dojo.objects.get(id=6))
+
+Ninja.objects.filter(sede_id=4)
+Ninja.objects.filter(sede_id=5)
+Ninja.objects.filter(sede_id=6)
+
+Dojo.objects.create(name="Oliver", city="Santiago", state="Metro", desc="Nuevo Dojo")
