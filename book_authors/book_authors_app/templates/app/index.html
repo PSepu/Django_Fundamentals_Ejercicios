@@ -1,0 +1,37 @@
+{% extends "app/base.html"%}
+
+{% block titulo %}Books and Authors{% endblock %}
+
+{% block estilos %}
+
+<style>
+
+    h1{
+        text-align: center;
+        font-size: 50px;
+    }
+</style>
+
+{% endblock %}
+
+{% block contenido %}
+
+<div class="container mt-5">
+    <hr>
+    <h1>Books and Authors</h1>
+    <hr>
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+
+    toastr.info("Bienvenidos a Books and Authors");
+
+</script>
+
+
+{% endblock %}

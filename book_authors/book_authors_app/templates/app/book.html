@@ -1,0 +1,90 @@
+{% extends "app/base.html"%}
+
+{% block titulo %}Books and Authors{% endblock %}
+
+{% block estilos %}
+
+<style>
+    h1 {
+        text-align: center;
+        font-size: 50px;
+        margin-top: 100px;
+    }
+</style>
+
+{% endblock %}
+
+{% block contenido %}
+<div class="row">
+    <div class="col-4 bg-secondary text-light m-2">
+        <h2>Nombre : {{book.title}}</h2>
+        <h4>ID : {{book.id}}</h4>
+        <p>Creado el : {{book.created_at}}</p>
+        <p>Actualizado el : {{book.updated_at}}</p>
+        <p>Descripcion : {{book.desc}}</p>
+    </div>
+    <div class=" col-4 bg-secondary text-light m-2">
+        <h5>Autores responsables</h5>
+        <ol>
+            {% for author in book.authors.all %}
+            <li>{{author.first_name}} {{author.last_name}}</li>
+            {% endfor %}
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class=" col-4 bg-secondary text-light m-2">
+        <h5>Agrega o Quitar un Autor --> </h5>
+    </div>
+    <div class=" col-4 bg-secondary text-light m-2">
+        <form action="/book/{{book.id}}/add/author/" method="post">
+            {% csrf_token %}
+            <div class="col-8">
+                <select class="form-select m-2" name="author">
+                <option value="">Agregar Autor</option>
+                {% for author in authors %}
+                    <option value={{author.id}}>{{author.first_name}} {{author.last_name}} </option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="row g-4 mt-1 align-items-center m-2">
+                <div class="col-4">
+                </div>
+                <div class="col-8">
+                    <button type="submit" class="btn btn-primary">Agregar</button>
+                </div>
+            </div>
+        </form>
+        <form action="/book/{{book.id}}/remove/author/" method="post">
+            {% csrf_token %}
+            <div class="col-8">
+                <select class="form-select m-2" name="author">
+                <option value="">Quitar Autor</option>
+                {% for author in authors %}
+                    <option value={{author.id}}>{{author.first_name}} {{author.last_name}} </option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="row g-4 mt-1 align-items-center m-2">
+                <div class="col-4">
+                </div>
+                <div class="col-8">
+                    <button type="submit" class="btn btn-primary">Quitar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+
+    toastr.info("Bienvenidos a Books and Authors");
+
+</script>
+
+
+{% endblock %}

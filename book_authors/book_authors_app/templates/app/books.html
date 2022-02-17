@@ -1,0 +1,81 @@
+{% extends "app/base.html"%}
+
+{% block titulo %}Books and Authors{% endblock %}
+
+{% block estilos %}
+
+<style>
+
+    h1{
+        text-align: center;
+        font-size: 50px;
+        margin-top: 100px;
+    }
+</style>
+
+{% endblock %}
+
+{% block contenido %}
+<div class="row">
+    <div class=" col-7 bg-secondary text-light m-2">
+        <h4>Agregar Libro</h4>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="mb-3 mt-3">
+                <label for="book" class="form-label">Nuevo Libro</label>
+                <input type="text" class="form-control" id="book" name="title">
+            </div>
+                <div class="mb-3">
+                <label for="desc" class="form-label">Descripcion del Libro</label>
+                <input type="Text" class="form-control" id="book" name="desc">
+            </div>
+                <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">¿Seguro quiere agregar este libro?</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Agregar</button>
+        </form>
+        <hr>
+        <h4>Quitar Libro</h4>
+        <form action="/books/remove/" method="post">
+            {% csrf_token %}
+            <div class="col-8">
+                <select class="form-select m-2" name="book_id">
+                <option value="">Quitar Libro</option>
+                {% for book in books %}
+                    <option value={{book.id}}>{{book.title}} {{book.id}}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="row g-4 mt-1 align-items-center m-2">
+                <div class="col-4">
+                </div>
+                <div class="col-8">
+                    <button type="submit" class="btn btn-primary">Quitar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-3">
+        <h1>Books</h1>
+        {% for book in books %}
+        <hr>
+        <p>Nombre : {{book.title}}</p>
+        <p>Descripcion : {{book.desc}}</p>
+        <a href="{% url 'book' id=book.id %}"> View </a>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+
+    toastr.info("Bienvenidos a Books and Authors");
+
+</script>
+
+
+{% endblock %}
