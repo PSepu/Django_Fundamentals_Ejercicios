@@ -1,0 +1,35 @@
+{% extends "base.html"%}
+
+{% block titulo %}Inicio{% endblock %}
+
+{% block estilos %}
+<style>
+.container {
+    margin-top:20px;
+    margin-left:10px;
+}
+</style>
+
+{% endblock %}
+
+{% block contenido %}
+<div class="container">
+    <h3>¿Seguro quiere eliminar este registro?</h3>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-sm btn-success" style="background-color:#940404; border-color: black; color: white;"><i class="fa fa-times" aria-hidden="true"></i> Eliminar </button>
+        <a href="{% url 'all_shows' %}" class="btn btn-sm btn-success" style="background-color:#04941c; border-color: black; color: white;"><i class="fa fa-check" aria-hidden="true"></i> Mantener </a>
+    </form>
+    <hr>
+    <h6> ID:{{show.id}}</h4>
+    <h1>Titulo:{{show.title}}</h1>
+    <h5>Network: {{show.network}}</h5>
+    <h5>Estreno: {{show.release_date}}</h5>
+    <hr>
+</div>
+{% endblock %}
+
+{% block scripts %}
+
+
+{% endblock %}

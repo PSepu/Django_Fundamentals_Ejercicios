@@ -1,0 +1,56 @@
+{% extends "base.html"%}
+
+{% block titulo %}Inicio{% endblock %}
+
+{% block estilos %}
+<style>
+.container {
+    margin-top:20px;
+    margin-left:10px;
+}
+</style>
+
+{% endblock %}
+
+{% block contenido %}
+<div class="container">
+    <h1>All Shows</h1>
+    <hr>
+
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Titulo</th>
+                <th>Canal</th>
+                <th>Fecha Estreno</th>
+                <th>Descripcion</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for show in shows %}
+            <tr>
+                <td>{{show.id}}</td>
+                <td>{{show.title}}</td>
+                <td>{{show.network}}</td>
+                <td>{{show.release_date}}</td>
+                <td>{{show.desc}}</td>
+                <td> 
+                    <a href="{% url 'show' id=show.id %}" class="btn btn-sm btn-success"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                    <a href="{% url 'edit' id=show.id %}" class="btn btn-sm btn-success" style="background-color:#045C94; border-color: #02314D; color: white;"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <a href="{% url 'delete' id=show.id %}" class="btn btn-sm btn-success" style="background-color:#a80505; border-color: black; color: white;"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'create' %}" class="btn btn-primary" style="background-color:#045C94; border-color: #02314D; color: white;"><i class="fa fa-plus-circle" aria-hidden="true"></i></i> Crear Nuevo Show</a>
+    
+</div>
+{% endblock %}
+
+{% block scripts %}
+
+
+{% endblock %}

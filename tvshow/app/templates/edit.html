@@ -1,0 +1,73 @@
+{% extends "base.html"%}
+
+{% block titulo %}Inicio{% endblock %}
+
+{% block estilos %}
+<style>
+.container {
+    margin-top:20px;
+    margin-left:10px;
+}
+</style>
+
+{% endblock %}
+
+{% block contenido %}
+
+<div class="container mt-8">
+    <h1> <i class="fa fa-user-circle" aria-hidden="true"></i> Editar Show</h1>
+    <div class="row">
+        <div class="col-6">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="row g-4 mt-1 align-items-center">
+                    <div class="col-4">
+                        <label for="title" class="col-form-label">Titulo</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="text" id="title" class="form-control" name="title" value="{{show.title}}">
+                    </div>
+                </div>
+                <div class="row g-4 mt-1 align-items-center">
+                    <div class="col-4">
+                        <label for="network" class="col-form-label">Canal</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="text" id="network" class="form-control" name="network" value="{{show.network}}">
+                    </div>
+                </div>
+                <div class="row g-4 mt-1 align-items-center">
+                    <div class="col-4">
+                        <label for="release_date" class="col-form-label">Fecha Estreno</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="date" id="release_date" class="form-control" name="release_date" value="{{show.release_date}}">
+                    </div>
+                </div>
+                <div class="row g-4 mt-1 align-items-center">
+                    <div class="col-4">
+                        <textarea name="desc" id="desc" cols="84" rows="5" >Descripcion</textarea>
+                    </div>
+                    <div class="col-8">
+                        <input type="text" id="desc" class="form-control" name="text" value="{{show.desc}}">
+                    </div>
+                </div>
+                <div class="row g-4 mt-1 align-items-center">
+                    <div class="col-4">
+                    </div>
+                    <div class="col-8">
+                        <button type="submit" class="btn btn-primary">Actualizar Informacion</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html"%}
+
+{% block titulo %}Inicio{% endblock %}
+
+{% block estilos %}
+<style>
+.container {
+    margin-top:20px;
+    margin-left:10px;
+}
+</style>
+
+{% endblock %}
+
+{% block contenido %}
+<div class="container">
+    <h6> ID:{{show.id}}</h4>
+    <h1>Titulo:{{show.title}}</h1>
+    <h5>Canal: {{show.network}}</h5>
+    <h5>Estreno: {{show.release_date}}</h5>
+    <hr>
+    <p>Descripcion: </p>
+    <p>{{show.desc}}</p>
+    <hr>
+    <a href="{% url 'edit' id=show.id %}" class="btn btn-sm btn-success" style="background-color:#045C94; border-color: #02314D; color: white;"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+    <a href="{% url 'delete' id=show.id %}" class="btn btn-sm btn-success" style="background-color:#a80505; border-color: black; color: white;"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+    
+</div>
+{% endblock %}
+
+{% block scripts %}
+
+
+{% endblock %}
