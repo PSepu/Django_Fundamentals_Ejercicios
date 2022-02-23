@@ -15,7 +15,7 @@
 {% block contenido %}
 
 <div class="container mt-8">
-    <h1> <i class="fa fa-user-circle" aria-hidden="true"></i> Editar Show</h1>
+    <h1><i class="fa fa-pencil-square" aria-hidden="true"></i>  Editar Show</h1>
     <div class="row">
         <div class="col-6">
             <form action="" method="post">
@@ -44,19 +44,21 @@
                         <input type="date" id="release_date" class="form-control" name="release_date" value="{{show.release_date}}">
                     </div>
                 </div>
-                <div class="row g-4 mt-1 align-items-center">
+                <hr>
+                <h5><i class="fa fa-comments" aria-hidden="true"></i>   Descripcion</h5>
+                <div class="row g-4  align-items-center">
                     <div class="col-4">
-                        <textarea name="desc" id="desc" cols="84" rows="5" >Descripcion</textarea>
+                        <textarea name="desc" id="desc" cols="84" rows="5" style="background-color: #f9fae0;" ></textarea>
                     </div>
                     <div class="col-8">
-                        <input type="text" id="desc" class="form-control" name="text" value="{{show.desc}}">
+                        <input type="text" id="desc" class="form-control" name="text" value="{{show.desc}}" >
                     </div>
                 </div>
                 <div class="row g-4 mt-1 align-items-center">
                     <div class="col-4">
                     </div>
                     <div class="col-8">
-                        <button type="submit" class="btn btn-primary">Actualizar Informacion</button>
+                        <button type="submit" class="btn btn-primary" style="background-color:#045C94; color:white; border-color: #02314D; margin-left:-220px;"><i class="fa fa-pencil" aria-hidden="true"></i> Actualizar Informacion</button>
                     </div>
                 </div>
             </form>

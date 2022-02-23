@@ -8,6 +8,15 @@
     margin-top:20px;
     margin-left:10px;
 }
+/*.input:focus {
+    box-shadow: 0 0 0 3px hsla(var(--input-focus-h), var(--input-focus-s), calc(var(--input-focus-l) + 40%), 0.8);
+    outline: 3px solid transparent;
+}
+.input {
+
+    transition: 180ms box-shadow ease-in-out;
+}*/
+
 </style>
 
 {% endblock %}
@@ -20,7 +29,7 @@
             <hr>
             <form action="" method="post">
                 {% csrf_token %}
-                <div class="row g-4 mt-1 align-items-center">
+                <div class="row g-4 mt-1 align-items-center" >
                     <div class="col-4">
                         <label for="title" class="col-form-label">Titulo</label>
                     </div>
@@ -45,12 +54,13 @@
                     </div>
                 </div>
                 <hr>
-                <textarea name="desc" id="desc" cols="84" rows="5" >Descripcion</textarea>
+                <h5><i class="fa fa-comments" aria-hidden="true"></i>   Descripcion</h5>
+                <textarea name="desc" id="desc" cols="84" rows="5" style="background-color: #f9fae0;" ></textarea>
                 <div class="row g-4 mt-1 align-items-center">
                     <div class="col-4">
                     </div>
                     <div class="col-8">
-                        <button type="submit" class="btn btn-primary" style="background-color:#045C94; color:white; border-color: #02314D; margin-left:-220px;"><i class="fa fa-plus-circle" aria-hidden="true"></i></i>  Crear Nuevo Show</button>
+                        <button type="submit" class="btn btn-primary" style="background-color:#045C94; color:white; border-color: #02314D; margin-left:-220px;"><i class="fa fa-plus-circle" aria-hidden="true"></i>  Crear Nuevo Show</button>
                     </div>
                 </div>
             </form>
