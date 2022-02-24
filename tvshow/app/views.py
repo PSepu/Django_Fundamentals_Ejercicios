@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, reverse
+from django.contrib import messages
 from app.models import Show
+from datetime import datetime
 
 # Create your views here.
 def index(request):
@@ -14,12 +16,22 @@ def create(request):
         return render(request, 'create_show.html')
     if request.method == "POST":
         print(request.POST)
-        title = request.POST['title']
-        network = request.POST['network']
-        release_date = request.POST['release_date']
-        desc = request.POST['desc']
+
+        errors = Show.objects.basic_validator(request.POST)
+
+        if len(errors) > 0:
+            for key,value in errors.items():
+                messages.error(request,value)
+            
+            return redirect ('create')
         
-        Show.objects.create(title=title, network=network, release_date=release_date, desc=desc)
+        else:
+            Show.objects.create(
+                title = request.POST['title'],
+                network = request.POST['network'],
+                release_date = request.POST['release_date'],
+                desc = request.POST['desc'],
+            )
         return redirect("all_shows")
 
 def all_shows(request):
@@ -39,20 +51,33 @@ def show(request, id):
 def edit(request, id):
     
     show = Show.objects.get(id=id)
+    release_date_tr=show.release_date
+    release_date_tr=release_date_tr.strftime("%Y-%m-%d")
+    print(release_date_tr)
 
     if request.method == 'GET':
         contexto = {
+            'release_date_tr': release_date_tr,
             'show' : show
         }
         return render(request, 'edit.html',contexto)
     
     if request.method == "POST":
         print(request.POST)
-        show.title = request.POST['title']
-        show.network = request.POST['network']
-        show.release_date = request.POST['release_date']
-        show.desc = request.POST['desc']  
-        show.save()
+        
+        errors = Show.objects.basic_validator(request.POST)
+
+        if len(errors)> 0:
+            for key,value in errors.items():
+                messages.error(request,value)
+            return redirect (f'/edit/{id}') 
+        
+        else:
+            show.title = request.POST['title']
+            show.network = request.POST['network']
+            show.release_date = request.POST['release_date']
+            show.desc = request.POST['desc']  
+            show.save()
         
     return redirect(reverse('all_shows'))
 
@@ -66,3 +91,5 @@ def delete(request, id):
     if request.method == 'POST':
         show.delete()
     return redirect(reverse('all_shows'))
+
+
