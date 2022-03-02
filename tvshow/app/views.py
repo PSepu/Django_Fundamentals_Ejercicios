@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
-from app.models import Show
+from app.models import Show, User
 from datetime import datetime
+#import bcrypt
 
 # Create your views here.
 def index(request):
@@ -92,4 +93,29 @@ def delete(request, id):
         show.delete()
     return redirect(reverse('all_shows'))
 
+def create_usuario(request):
+    password = request.POST['password']
+    pw_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
 
+    if request.method == "GET":
+        return render(request, 'register.html')
+    if request.method == "POST":
+        print(request.POST)
+
+        errors = User.objects.basic_validator(request.POST)
+
+        if len(errors) > 0:
+            for key,value in errors.items():
+                messages.error(request,value)
+            
+            return redirect ('create')
+
+        else:
+            User.objects.create(
+                first_name = request.POST['first_name'],
+                last_name = request.POST['last_name'],
+                email = request.POST['email'],
+                birthday = request.POST['birthday'],
+                password = pw_hash,
+            )
+        return redirect("register")
