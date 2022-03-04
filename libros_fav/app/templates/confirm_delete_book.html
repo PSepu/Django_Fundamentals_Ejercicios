@@ -3,17 +3,12 @@
 {% block titulo %}Inicio{% endblock %}
 
 {% block estilos %}
-<style>
-.container {
-    margin-top:20px;
-    margin-left:10px;
-}
-</style>
+
 
 {% endblock %}
 
 {% block contenido %}
-<div class="container">
+<div class="container mt-5">
     <h3>¿Seguro quiere eliminar este libro?</h3>
     <form method="post">
         {% csrf_token %}

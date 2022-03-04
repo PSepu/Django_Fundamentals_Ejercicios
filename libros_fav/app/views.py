@@ -138,7 +138,7 @@ def logout(request):
 def all_books(request):
     if request.method == "GET":
         contexto = {
-            'books': Book.objects.exclude(uploaded_by=User.objects.get(id=request.session['user']['id'])),
+            'books': Book.objects.exclude(users=User.objects.get(id=request.session['user']['id'])),
             'favoritos': Book.objects.filter(users=User.objects.get(id=request.session['user']['id'])),
         }
 

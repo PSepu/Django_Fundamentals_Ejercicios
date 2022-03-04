@@ -3,27 +3,23 @@
 {% block titulo %}Inicio{% endblock %}
 
 {% block estilos %}
-<style>
-.container {
-    margin-top:20px;
-    margin-left:10px;
-}
-</style>
+
 
 {% endblock %}
 
 {% block contenido %}
-<hr>
+
+
+<div class="container mt-5">
+    <hr>
 {% if messages %}
-<ul class="messages">    
-    {% for message in messages %}    
-        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
-    {% endfor %}
-</ul>
+    <ul class="messages">    
+        {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+    </ul>
 {% endif %}
 <hr>
-
-<div class="container mt-8">
     <h1><i class="fa fa-pencil-square" aria-hidden="true"></i>  Editar Libro</h1>
     <div class="row">
         <div class="col-6">

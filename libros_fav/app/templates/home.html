@@ -1,6 +1,6 @@
 {% extends "basehome.html"%}
 
-{% block titulo %}Inicio{% endblock %}
+{% block titulo %}Home{% endblock %}
 
 {% block estilos %}
 
@@ -16,13 +16,13 @@
 {% endblock %}
 
 {% block contenido %}
-<div class="container mt-6">
+<div class="container mt-5">
     {% if messages %}
-<ul class="messages">    
-    {% for message in messages %}    
-        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
-    {% endfor %}
-</ul>
+    <ul class="messages">    
+        {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+    </ul>
 {% endif %}
     <hr>
     <div class="row">
@@ -53,7 +53,7 @@
                 <button type="submit" class="btn btn-primary" style="background-color:#045C94; color:white; border-color: #02314D;"><i class="fa fa-book" aria-hidden="true"></i>  Registar Libro</button>
             </form>
         </div>
-        <div class="col-8">
+        <div class="col-9">
             <h3>Todos tus Libros</h3>
             <hr>
             <table class="table table-striped table-bordered table-hover">
