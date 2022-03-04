@@ -1,0 +1,51 @@
+{% extends "basehome.html"%}
+
+{% block titulo %}Inicio{% endblock %}
+
+{% block estilos %}
+<style>
+.container {
+    margin-top:20px;
+    margin-left:10px;
+}
+</style>
+
+{% endblock %}
+
+{% block contenido %}
+<hr>
+{% if messages %}
+<ul class="messages">    
+    {% for message in messages %}    
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+    {% endfor %}
+</ul>
+{% endif %}
+<hr>
+<div class="container mt-8">
+    <h1><i class="fa fa-pencil-square" aria-hidden="true"></i> ¿Te Gusto el Libro? {{books.title}}</h1>
+    <div class="row">
+        <div class="col-6">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="row g-4 mt-1 align-items-center">
+                    <div class="col-4">
+                        <label for="users_like" class="col-form-label">¿Te Gusto?</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="select" id="title" class="form-control" name="title" value="{{books.user_like}}">
+                    </div>
+                </div>
+                <hr>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+
+
+{% endblock %}

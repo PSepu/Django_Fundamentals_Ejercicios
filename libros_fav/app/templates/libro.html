@@ -1,0 +1,38 @@
+{% extends "basehome.html"%}
+
+{% block titulo %}Inicio{% endblock %}
+
+{% block estilos %}
+<style>
+.container {
+    margin-top:20px;
+    margin-left:10px;
+}
+</style>
+
+{% endblock %}
+
+{% block contenido %}
+<div class="container">
+    <h6> ID:{{books.id}}</h4>
+    <h1> Titulo:{{books.title}}</h1>
+    <hr>
+    <p>Descripcion: </p>
+    <p>{{books.desc}}</p>
+    <hr>
+    <h4>Usuarios que han agregado este titulo a sus favoritos </h4>
+    {% for user in favoritos %}
+    <ul>
+        <li>ID: {{user.id}}  -  Nombre: {{user.nombre}} {{user.apellido}}</li>
+    </ul>
+    {% endfor %}
+    <hr>
+    <a href="{% url 'edit_book' id=books.id %}" class="btn btn-sm btn-success" style="background-color:#045C94; border-color: #02314D; color: white;"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+    <a href="{% url 'delete_book' id=books.id %}" class="btn btn-sm btn-success" style="background-color:#a80505; border-color: black; color: white;"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+</div>
+{% endblock %}
+
+{% block scripts %}
+
+
+{% endblock %}
