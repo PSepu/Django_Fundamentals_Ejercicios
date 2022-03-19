@@ -1,0 +1,29 @@
+{% extends "basehome.html"%}
+
+{% block titulo %}Registro{% endblock %}
+
+{% block estilos %}
+
+
+{% endblock %}
+
+{% block contenido %}
+<div class="container mt-5">
+    <h3> Titulo:{{job.job}}</h3>
+    <div class="conteinerinfo" style="width: 400px; height: 250px; border: 1px solid black; padding: 10px;">
+        <p>Descripcion {{job.job_desc}}</p>
+        <p> Ubicacion: {{job.job_loc}}</p>
+        <p> Publicado por: {{job.user}}</p>
+        <p> Publicado el: {{job.created_at}}</p>
+    </div>
+    <hr>
+    <a href="{% url 'all_jobs' %}" class="btn btn-sm btn-success" style="background-color:#000000; border-color: #02314D; color: white;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver </a>
+    <a href="{% url 'added_job' id=job.id %}" class="btn btn-sm btn-success" style="background-color:#949204; border-color: #02314D; color: white;"><i class="fa fa-plus" aria-hidden="true"></i> Agregar a mi lista</a>
+    
+</div>
+{% endblock %}
+
+{% block scripts %}
+
+
+{% endblock %}

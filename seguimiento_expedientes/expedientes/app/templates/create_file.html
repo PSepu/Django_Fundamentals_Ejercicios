@@ -1,0 +1,73 @@
+{% extends "basehome.html"%}
+
+{% block titulo %}Crear Expediente{% endblock %}
+
+{% block estilos %}
+
+<style>
+
+    h1{
+        text-align: center;
+        font-size: 50px;
+        margin-top: 100px;
+    }
+</style>
+
+{% endblock %}
+
+{% block contenido %}
+<div class="container mt-5">
+    {% if messages %}
+    <ul class="messages">    
+        {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+    </ul>
+{% endif %}
+    <hr>
+    <div class="row">
+        <div class="col-6">
+            <h3>Crear Expediente</h3>
+            <hr>
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ FileForm.non_field_errors }}
+                {% for field in FileForm %}
+                <div class="mb-3 row">
+                    <label for="{{ field.id_for_label }}" class="col-sm-3 col-form-label">{{ field.label }}</label>
+                    <div class="col-sm-9">
+                        {{ field }}
+                    </div>
+                    {% if field.errors %}
+                    <div class="alert alert-danger mt-2" role="alert">
+                        {% for error in field.errors %}
+                        {{ error }}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% if field.help_text %}
+                    <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary" style="background-color:#045C94; color:white; border-color: #02314D;"><i class="fa fa-book" aria-hidden="true"></i>  Crear Expediente</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+
+
+
+<script>
+
+    toastr.info("Crea un nuevo expediente", "Seguimiento");
+
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "base.html"%}
+
+{% block titulo %}Inicio{% endblock %}
+
+{% block estilos %}
+
+<style>
+    .container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    h1{
+        text-align: center;
+        font-size: 50px;
+        margin-bottom:10px;
+        color: #080808;
+}
+    .btn{
+        margin-top: 50px;
+    }
+</style>
+
+{% endblock %}
+
+{% block contenido %}
+<div class="container mt-5">
+    <div class="vh-100 row m-0 text-center align-items-center justify-content-center ">
+        <div class="col-auto">
+            <h1>Bienvenidos</h1>
+            <h3>Seguimiento de Expedientes Perfectos</h3>
+            <p>Herramienta creada para cumplir con el procedimiento de la entrega </p>
+            <p>de expedientes perfectos por parte de inmobiliaria</p>
+            <h1><i class="fa fa-file-text" aria-hidden="true"></i> <i class="fa fa-arrow-right" aria-hidden="true"></i> <i class="fa fa-file-text" aria-hidden="true"></i> <i class="fa fa-arrow-right" aria-hidden="true"></i>  <i class="fa fa-file-text" aria-hidden="true"></i> <i class="fa fa-arrow-right" aria-hidden="true"></i> <i class="fa fa-check-circle" aria-hidden="true"></i></h1>
+            <a href="{% url 'add_user' %}" class="btn btn-lg btn-dark"><i class="fa fa-sign-in" aria-hidden="true"></i> ENTRAR</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+
+    toastr.info("Dale CLICK a entrar", "Acceso");
+
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "basehome.html"%}
+
+{% block titulo %}Eliminar{% endblock %}
+
+{% block estilos %}
+
+
+{% endblock %}
+
+{% block contenido %}
+<div class="container mt-5">
+    <h3>¿Seguro quiere eliminar este expediente?</h3>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-sm btn-success" style="background-color:#940404; border-color: black; color: white;"><i class="fa fa-times" aria-hidden="true"></i> Eliminar </button>
+        <a href="{% url 'all_files' %}" class="btn btn-sm btn-success" style="background-color:#04941c; border-color: black; color: white;"><i class="fa fa-check" aria-hidden="true"></i> Mantener </a>
+    </form>
+    <hr>
+    <h1> Tarea:{{file.file_name}}</h1>
+    <hr>
+</div>
+{% endblock %}
+
+{% block scripts %}
+
+
+{% endblock %}

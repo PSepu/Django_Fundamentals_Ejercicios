@@ -1,0 +1,83 @@
+{% extends "basehome.html"%}
+
+{% block titulo %}Inicio{% endblock %}
+
+{% block estilos %}
+<style>
+.container {
+    margin-top:20px;
+    margin-left:10px;
+}
+</style>
+
+{% endblock %}
+
+{% block contenido %}
+
+<div class="container mt-5">
+    {% if messages %}
+    <ul class="messages">    
+        {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="row">
+        <div class="col-7">
+            <hr>
+            <h3>Todos los Trabajos</h3>
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Trabajo</th>
+                        <th>Ubicacion</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for job in jobs %}
+                    <tr>
+                        <td>{{job.job}}</td>
+                        <td>{{job.job_loc}}</td>
+                        <td> 
+                            <a href="{% url 'show_job' id=job.id %}" class="btn btn-sm btn-success"><i class="fa fa-eye" aria-hidden="true"></i> Ver </a>
+                            <a href="{% url 'added_job' id=job.id %}" class="btn btn-sm btn-success" style="background-color:#949204; border-color: #02314D; color: white;"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</a>
+                            {% if job.user == user %}
+                                <a href="{% url 'edit_job' id=job.id %}" class="btn btn-sm btn-success" style="background-color:#045C94; border-color: #02314D; color: white;"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>
+                                <a href="{% url 'delete_job' id=job.id %}" class="btn btn-sm btn-success" style="background-color:#f70404; border-color: #000102; color: white;"><i class="fa fa-trash" aria-hidden="true"></i> Cancelar</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </div>
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Trabajo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for job in addedjobs %}
+                    <tr>
+                        <td>{{job.job}}</td>
+                        <td> 
+                            <a href="{% url 'show_job' id=job.id %}" class="btn btn-sm btn-success"><i class="fa fa-eye" aria-hidden="true"></i> Ver</a>
+                            <a href="{% url 'delete_job' id=job.id %}" class="btn btn-sm btn-success" style="background-color:#070707; border-color: #000102; color: white;"><i class="fa fa-check" aria-hidden="true"></i> Listo</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </div>
+        </div>
+        <H3>Mis trabajos</H3>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+
+{% endblock %}

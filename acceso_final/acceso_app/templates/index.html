@@ -1,0 +1,47 @@
+{% extends "base.html"%}
+
+{% block titulo %}Inicio{% endblock %}
+
+{% block estilos %}
+
+<style>
+    .container{
+        /*background-color: grey;*/
+        background-image: url("https://wallpaperaccess.com/full/220646.jpg");
+        background-size: 100% 100%;
+}
+    h1{
+        text-align: center;
+        font-size: 50px;
+        margin-bottom:300px;
+        color: #FFBB1C;
+}
+    img{
+
+    }
+</style>
+
+{% endblock %}
+
+{% block contenido %}
+<div class="container">
+    <div class="vh-100 row m-0 text-center align-items-center justify-content-center">
+        <div class="col-auto">
+            <h1>Bienvenidos</h1>
+            <a href="{% url 'add_user' %}" class="btn btn-lg btn-dark"><i class="fa fa-sign-in" aria-hidden="true"></i> ENTRAR</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+
+    toastr.info("Dale CLICK a entrar", "Acceso");
+
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html"%}
+
+{% block titulo %}Inicio{% endblock %}
+
+{% block estilos %}
+
+<style>
+
+    h1{
+        text-align: center;
+        font-size: 50px;
+        margin-top: 10px;
+    }
+    .btn{
+        margin-top: 50px;
+    }
+
+</style>
+
+{% endblock %}
+
+{% block contenido %}
+<div class="container">
+    <div class="vh-100 row m-0 text-center align-items-center justify-content-center">
+        <div class="col-auto">
+            <h1>REGISTRO EXITOSO</h1>
+            <h3>Ahora es Click en el BOTON para acceder</h3>
+            <h1><i class="fa fa-users" aria-hidden="true"></i> <i class="fa fa-arrow-right" aria-hidden="true"></i> <i class="fa fa-file-text" aria-hidden="true"></i> <i class="fa fa-arrow-right" aria-hidden="true"></i>  <i class="fa fa-file-text" aria-hidden="true"></i> <i class="fa fa-arrow-right" aria-hidden="true"></i> <i class="fa fa-check-circle" aria-hidden="true"></i></h1>
+            <a href="{% url 'add_user' %}" class="btn btn-lg btn-dark"><i class="fa fa-sign-in" aria-hidden="true"></i> Al LOGIN</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+
+    toastr.info("Usuario Registrado", "Bienvenido");
+
+</script>
+
+
+{% endblock %}
