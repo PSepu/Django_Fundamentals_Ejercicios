@@ -103,15 +103,16 @@ def all_files(request):
         }
         return render(request, 'all_files.html', contexto)
 
-def my_files(request):
+def all_my_files(request):
     user=User.objects.get(id=request.session['user']['id'])
     if request.method == "GET":
         contexto = {
             'user' : User.objects.get(id=request.session['user']['id']),
-            'files': File.objects.all().order_by('-updated_at').exclude(add=User.objects.get(id=request.session['user']['id'])),
-        #    'addedjobs': Job.objects.filter(add=User.objects.get(id=request.session['user']['id'])),
+            #'files': File.objects.all(),
+            'files': File.objects.filter(user=User.objects.get(id=request.session['user']['id'])),
+            'tasks': Task.objects.all().order_by('updated_at'),
         }
-        return render(request, 'all_files.html', contexto)
+        return render(request, 'all_my_files.html', contexto)
 
 def create_file(request):
     if request.method == "GET":

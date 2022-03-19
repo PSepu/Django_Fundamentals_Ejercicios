@@ -16,6 +16,7 @@ urlpatterns =[
     #-------Expedientes-----#
     path('createfile/', views.create_file, name='create_file'),
     path('files/', views.all_files, name='all_files'),
+    path('filesmy/', views.all_my_files, name='all_my_files'),
     path('deletefile/<int:id>', views.delete_file, name='delete_file'),
     path('files/<int:id>/complete/task/', views.task_complete, name='task_complete'),
 ]

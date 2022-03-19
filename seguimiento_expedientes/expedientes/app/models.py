@@ -89,6 +89,7 @@ class File(models.Model):
     user = models.ForeignKey(User, related_name="users", on_delete=models.CASCADE, null=True)
     added = models.BooleanField(default=False, null=True)
     complete = models.ManyToManyField(User, related_name='complete')
+    uploaded_by=models.ForeignKey(User, related_name="upload_by", on_delete=models.CASCADE, null=True)
     #tasks = models.ManyToManyField(Task, related_name='task') 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -122,6 +123,7 @@ class Task(models.Model):
 class Exp_task(models.Model):
     task=models.ForeignKey(Task,related_name='rel1' ,on_delete=models.CASCADE)
     file=models.ForeignKey(File,related_name='rel2', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="userss", on_delete=models.CASCADE, null=True)
     completado=models.BooleanField(default=False) #True=completado, False= no completado
     update_at=models.DateTimeField(auto_now=True)
 
