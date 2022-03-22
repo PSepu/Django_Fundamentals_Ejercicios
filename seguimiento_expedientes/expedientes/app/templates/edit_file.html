@@ -1,0 +1,77 @@
+{% extends "basehome.html"%}
+
+{% block titulo %}Deseos{% endblock %}
+
+{% block estilos %}
+<style>
+    .container {
+        margin-top:20px;
+        margin-left:10px;
+    }
+    </style>
+
+{% endblock %}
+
+{% block contenido %}
+
+
+<div class="container mt-5">
+    <hr>
+{% if messages %}
+    <ul class="messages">    
+        {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+    </ul>
+{% endif %}
+    <h1><i class="fa fa-pencil-square" aria-hidden="true"></i>  Editar Expediente</h1>
+    <div class="row">
+        <div class="col-6">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="row g-4 mt-1 align-items-center">
+                    <div class="col-4">
+                        <label for="file_name" class="col-form-label">Expediente</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="text" id="file_name" class="form-control" name="file_name" value="{{file.file_name}}">
+                    </div>
+                    <div class="col-4">
+                        <label for="file_name" class="col-form-label">Formato</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="select" id="formato" class="form-control" name="formato" value="{{file.formato}}">
+                    </div>
+                    <div class="col-4">
+                        <label for="file_name" class="col-form-label">Numero de Tienda</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="number" id="store_number" class="form-control" name="formato" value="{{file.store_number}}">
+                    </div>
+                    <div class="col-4">
+                        <label for="file_name" class="col-form-label">Tipo de Proyecto</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="choices" id="formato" class="form-control" name="proj_type" value="{{file.proj_type}}">
+                    </div>
+                </div>
+                <div class="row g-4 mt-1 align-items-center">
+                    <div class="col-4">
+                    </div>
+                    <div class="col-8">
+                        <button type="submit" class="btn btn-primary" style="background-color:#045C94; color:white; border-color: #02314D; margin-left:-220px;"><i class="fa fa-pencil" aria-hidden="true"></i> Actualizar Informacion</button>
+                        <a href="{% url 'all_files' %}" class="btn btn-success" style="background-color:#940404; border-color: black; color: white;"><i class="fa fa-ban" aria-hidden="true"></i> Cancelar </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+
+
+{% endblock %}

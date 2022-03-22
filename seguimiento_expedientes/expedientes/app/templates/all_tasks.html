@@ -34,7 +34,6 @@
                             <td>{{task.id}}</td>
                             <td>{{task.task}}</td>
                             <td> 
-                                <a href="{% url 'edit_task' id=task.id %}" class="btn btn-sm btn-success" style="background-color:#045C94; border-color: #02314D; color: white;"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                 <a href="{% url 'delete_task' id=task.id %}" class="btn btn-sm btn-success" style="background-color:#f70404; border-color: #000102; color: white;"><i class="fa fa-trash" aria-hidden="true"></i></a>
                             </td>
                         </tr>

@@ -40,11 +40,19 @@ class valManager(models.Manager):
 
 
 class User(models.Model):
+
+    ROL_CHOICES = (
+        ('-----------', '-----------'),
+        ('1', 'Admin'),
+        ('2', 'Jefe Proyecto'),
+    )
+
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
     username = models.CharField(max_length=20, unique=True)
     email = models.EmailField(max_length=200, unique=True)
     password = models.CharField(max_length=72)
+    #rol = models.CharField(max_length=100, choices=ROL_CHOICES, null=True, default='-----------')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -83,9 +91,9 @@ class File(models.Model):
     )
 
     file_name = models.CharField(max_length=255)
-    formato = models.CharField(max_length=100, choices=FORMATO_CHOICES, default='Z')
+    formato = models.CharField(max_length=100, choices=FORMATO_CHOICES, default='-----------')
     store_number = models.IntegerField()
-    proj_type = models.CharField(max_length=100, choices=PROJ_TYPE_CHOICES, default='Z')
+    proj_type = models.CharField(max_length=100, choices=PROJ_TYPE_CHOICES, default='-----------')
     user = models.ForeignKey(User, related_name="users", on_delete=models.CASCADE, null=True)
     added = models.BooleanField(default=False, null=True)
     complete = models.ManyToManyField(User, related_name='complete')
@@ -115,7 +123,7 @@ class Task(models.Model):
     task = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    complete=models.ManyToManyField(File, related_name='completed')
+    #complete=models.BooleanField(default=False)
     files=models.ManyToManyField(File, related_name='files')
     #rel1 
     objects=taskManager()
@@ -124,7 +132,7 @@ class Exp_task(models.Model):
     task=models.ForeignKey(Task,related_name='rel1' ,on_delete=models.CASCADE)
     file=models.ForeignKey(File,related_name='rel2', on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name="userss", on_delete=models.CASCADE, null=True)
-    completado=models.BooleanField(default=False) #True=completado, False= no completado
+    complete=models.BooleanField(default=False) #True=completado, False= no completado
     update_at=models.DateTimeField(auto_now=True)
 
     #tarea_target=Task.objects.get(id=1)

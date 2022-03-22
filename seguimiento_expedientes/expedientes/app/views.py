@@ -6,6 +6,7 @@ from django.urls import reverse
 import bcrypt
 
 # Create your views here.
+#----------------------------Usuarios----------------------------------------------#
 def index(request):
 
     return render(request, 'index.html')
@@ -91,6 +92,12 @@ def succed(request):
     if request.method == "GET":
         return render(request, 'succed.html')
 
+def logout(request):
+    if 'user' in request.session:
+        del request.session['user']
+    
+    return redirect("index")
+
 #----------------------------Expedientes----------------------------------------------#
 
 def all_files(request):
@@ -99,18 +106,22 @@ def all_files(request):
         contexto = {
             'user' : User.objects.get(id=request.session['user']['id']),
             'files': File.objects.all().order_by('-updated_at'),
-            'tasks': Task.objects.all().order_by('updated_at'),
+            #'tasks': Task.objects.filter(complete=False).order_by('updated_at'),
+            'completed': Exp_task.objects.filter(complete=True)
         }
         return render(request, 'all_files.html', contexto)
 
 def all_my_files(request):
     user=User.objects.get(id=request.session['user']['id'])
+    files=  File.objects.filter(user=User.objects.get(id=request.session['user']['id']))
+   # files
     if request.method == "GET":
         contexto = {
             'user' : User.objects.get(id=request.session['user']['id']),
             #'files': File.objects.all(),
-            'files': File.objects.filter(user=User.objects.get(id=request.session['user']['id'])),
-            'tasks': Task.objects.all().order_by('updated_at'),
+            'files': files,
+            #'tasks_complete': Exp_task.objects.filter(complete=True),
+            
         }
         return render(request, 'all_my_files.html', contexto)
 
@@ -149,7 +160,7 @@ def create_file(request):
                 Exp_task.objects.create(task=t,file=file_nuevo)
 
 
-        return redirect("all_files")
+        return redirect("all_my_files")
 
 def delete_file(request, id):
     file = File.objects.get(id=id)
@@ -160,20 +171,37 @@ def delete_file(request, id):
         return render(request,'confirm_delete_file.html', contexto)
     if request.method == 'POST':
         file.delete()
-    return redirect(reverse('all_files'))
+    return redirect(reverse('all_my_files'))
 
-def task_complete(request, id):
 
-    #print(request.POST)
+def edit_file(request, id):
+    
+    file = File.objects.get(id=id)
 
-    este_file = File.objects.get(id=id)
-    este_task = Task.objects.get(id=id)
-    print(este_file)
+    if request.method == 'GET':
+        contexto = {
+            'file' : file
+        }
+        return render(request, 'edit_file.html',contexto)
+    
+    if request.method == "POST":
+        print(request.POST)
+        
+        errors = File.objects.basic_validator(request.POST)
 
-    este_task.complete.add(este_file)
-    este_task.save()
-
-    return redirect('all_files')
+        if len(errors)> 0:
+            for key,value in errors.items():
+                messages.error(request,value)
+            return redirect (f'/edit/{id}') 
+        
+        else:
+            file.file_name = request.POST['file_name']
+            file.formato = request.POST['formato']
+            file.store_number = request.POST['store_number']
+            file.proj_type = request.POST['proj_type']
+            file.save()
+        
+    return redirect(reverse('all_my_files'))
 
 #----------------------------Tareas----------------------------------------------#
 def create_task(request):
@@ -207,6 +235,7 @@ def all_tasks(request):
     if request.method == "GET":
         contexto = {
             'tasks': Task.objects.all().order_by('updated_at'),
+            
         }
         return render(request, 'all_tasks.html', contexto)
 
@@ -246,3 +275,16 @@ def delete_task(request, id):
     if request.method == 'POST':
         task.delete()
     return redirect(reverse('all_tasks'))
+
+def complete_task(request, id):
+	tarea = Exp_task.objects.get(id=id) #como llego al task 
+	tarea.complete = True
+	tarea.save()
+	return redirect('all_my_files')
+
+    #class Exp_task(models.Model):
+    #task=models.ForeignKey(Task,related_name='rel1' ,on_delete=models.CASCADE)
+    #file=models.ForeignKey(File,related_name='rel2', on_delete=models.CASCADE)
+    #user = models.ForeignKey(User, related_name="userss", on_delete=models.CASCADE, null=True)
+    #complete=models.BooleanField(default=False) #True=completado, False= no completado
+    #update_at=models.DateTimeField(auto_now=True)

@@ -21,14 +21,14 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">              
                 <a class="nav-link active" aria-current="page" href="{% url 'all_my_files' %}"><i class="fa fa-home" aria-hidden="true"></i>
                     Home</a> <!--url:index como el home-->
             </li>
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{% url 'create_file' %}"><i class="fa fa-plus" aria-hidden="true"></i> Expediente</a> <!--url:ruta nombrada en URLS.PY-->
             </li>
-            {% if user.id == 1 %}
+            {% if request.session.user.id == 1 %}
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{% url 'all_files' %}"> TODOS los Expedientes</a> <!--url:ruta nombrada en URLS.PY-->
             </li>
@@ -46,7 +46,7 @@
                 <a class="nav-link active" aria-current="page" href="#">    ---------                  </a> <!--url:ruta nombrada en URLS.PY-->
             </li>
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">SALIR</a> <!--url:ruta nombrada en URLS.PY-->
+                <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">SALIR</a> <!--url:ruta nombrada en URLS.PY-->
             </li>
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">Bienvenido, {{request.session.user.nombre}} {{request.session.user.apellido}}</a> <!--url:ruta nombrada en URLS.PY-->
