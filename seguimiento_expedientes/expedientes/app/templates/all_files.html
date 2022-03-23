@@ -42,15 +42,33 @@
     overflow: hidden;
     padding: 15px 60px;
     display:flex;
-    height:50px;
+    height:110px;
     width:1296px;
-    flex-direction:row;
+    flex-direction:column;
     align-items:center;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     /*border-color:black;*/
     border-bottom: 7px solid #343434;
     margin-left: 10px;
     margin-top: 5px;
+    flex-wrap: wrap;
+}
+
+.stats{
+    background-color: #E6B31E;
+    line-height: 18px;
+    overflow: hidden;
+    display:flex;
+    height:50px;
+    width:1296px;
+    flex-direction:row;
+    align-items:center;
+    justify-content: flex-start;
+    border-color:black;
+    flex-wrap: wrap;
+    margin-top: 35px;
+    margin-left:-279px;
+    gap: 20px
 }
 
 </style>
@@ -58,8 +76,15 @@
 {% endblock %}
 
 {% block contenido %}
-<div class="titulo">
-    <h3 style="margin-left: 20px; margin-top: 10px;">Todos los Expedientes</h3>
+<div class="titulo"> 
+    <h3>Todos los Expedientes</h3>
+    <div class="stats">
+        <h6>Tareas totales : {{todos}}</h6>
+        <h6>Tareas Pendientes : {{pendientes}}</h6>
+        <h6>Tareas completadas : {{cumplidos}}</h6>
+        <h6>Cumplimiento los Expedientes:  %</h6>
+        
+    </div>
 </div>
     {% for file in files %}
     <div class="row">
@@ -81,27 +106,25 @@
                     <div></div>
                     <h5>Tareas Pendientes</h5>
                     </div>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                        aria-valuemin="0" aria-valuemax="100" style="width:50%">
-                        50%
-                        </div>
-                    </div>
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Tarea {{ file.rel2.count}}</th>
+                                <th>Tarea</th>
+                                <th>Status</th>
                                 <th>Ultima actualizacion</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for t in file.rel2.all %}
+                            {% if t.complete == False %}
                             <tr>
                                 <td>{{t.task.id}}</td>
                                 <td>{{t.task.task}}</td>
+                                <td>Pendiente</td>
                                 <td>{{t.task.updated_at}}</td>
                             </tr>
+                            {% endif %}
                             {% endfor %}
                         </tbody>
                     </table>
@@ -111,17 +134,21 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Tarea {{ file.rel2.count}}</th>
+                                <th>Tarea</th>
+                                <th>Status</th>
                                 <th>Completeda</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for t in file.rel2.filter.complete %}
+                            {% for t in file.rel2.all %}
+                            {% if t.complete == True %}
                             <tr>
                                 <td>{{t.task.id}}</td>
                                 <td>{{t.task.task}}</td>
-                                <td>{{t.task.update_at}}</td>
+                                <td>Completada</td>
+                                <td>{{t.task.updated_at}}</td>
                             </tr>
+                            {% endif %}
                             {% endfor %}
                         </tbody>
                     </table>

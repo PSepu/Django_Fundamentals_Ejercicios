@@ -3,7 +3,9 @@ from .models import User, Task, File, Exp_task
 from .forms import UserForm, LoginForm, TaskForm, FileForm
 from django.contrib import messages
 from django.urls import reverse
+from django.db.models import Avg, Count, Max, Min, Sum
 import bcrypt
+
 
 # Create your views here.
 #----------------------------Usuarios----------------------------------------------#
@@ -102,26 +104,40 @@ def logout(request):
 
 def all_files(request):
     user=User.objects.get(id=request.session['user']['id'])
+    todos=Exp_task.objects.all().count
+    pendientes= Exp_task.objects.filter(complete=False).count()
+    cumplidos=Exp_task.objects.filter(complete=True).count()
+    #Count.(Exp_task.objects.filter(complete=False)) * 100 / Count.(Exp_task.objects.all())
+    #porcentaje= input(pendientes) / input(todos) * 100
+
     if request.method == "GET":
         contexto = {
             'user' : User.objects.get(id=request.session['user']['id']),
             'files': File.objects.all().order_by('-updated_at'),
-            #'tasks': Task.objects.filter(complete=False).order_by('updated_at'),
-            'completed': Exp_task.objects.filter(complete=True)
+            'completed': Exp_task.objects.filter(complete=True),
+            'cumplidos': cumplidos,
+            'pendientes': pendientes,
+            'todos' :  todos,
+            #'porcentaje': porcentaje
         }
         return render(request, 'all_files.html', contexto)
 
 def all_my_files(request):
     user=User.objects.get(id=request.session['user']['id'])
     files=  File.objects.filter(user=User.objects.get(id=request.session['user']['id']))
+    
    # files
     if request.method == "GET":
         contexto = {
             'user' : User.objects.get(id=request.session['user']['id']),
             #'files': File.objects.all(),
             'files': files,
-            #'tasks_complete': Exp_task.objects.filter(complete=True),
-            
+            #'tasks_complete': Exp_task.objects.filter(complete=True),}
+            'totales': Exp_task.objects.filter(user=User.objects.get(id=request.session['user']['id'])).count(),
+            'cumplidos': Exp_task.objects.filter(complete=True).count(),
+            'pendientes': Exp_task.objects.filter(complete=False).count(),
+            'all' :  Exp_task.objects.all().count,
+
         }
         return render(request, 'all_my_files.html', contexto)
 
