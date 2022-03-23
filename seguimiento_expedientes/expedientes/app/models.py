@@ -133,7 +133,7 @@ class Exp_task(models.Model):
     file=models.ForeignKey(File,related_name='rel2', on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name="userss", on_delete=models.CASCADE, null=True)
     complete=models.BooleanField(default=False) #True=completado, False= no completado
-    update_at=models.DateTimeField(auto_now=True)
+    updated_at=models.DateTimeField(auto_now=True)
 
     #tarea_target=Task.objects.get(id=1)
     #tarea_target.rel1.file[0].file_name
